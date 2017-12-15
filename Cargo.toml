@@ -1,0 +1,17 @@
+[package]
+name = "http-server"
+version = "0.0.1"
+authors = ["Richard <richard.anaya@gmail.com>"]
+include = [
+    "src/**/*.rs",
+    "Cargo.toml",
+]
+license = "MIT"
+description = "Helper library for wasmblock"
+
+[dependencies]
+iron = "0.6"
+staticfile = "0.5"
+mount = "0.4"
+structopt = "0.1.0"
+structopt-derive = "0.1.0"
