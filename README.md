@@ -4,35 +4,35 @@ A dead simple http server for serving local files for development purposes
 
 # Installing
 
-'''bash
+```bash
  cargo install http-server
-'''
+```
 
 # Usage
 
 To server the local directory on http://localhost:8080
 
-'''bash
+```bash
 http-server
-'''
+```
 
 To server the local directory on http://localhost:<port>
 
-'''bash
+```bash
 http-server -p <port>
-'''
+```
 
 To server the any directory on http://localhost:<port>
 
-'''bash
+```bash
 http-server -p <port> <directory>
-'''
+```
 
 For help:
 
-'''bash
+```bash
 http-server --help
-'''
+```
 
 # Credit
 
