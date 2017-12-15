@@ -46,7 +46,7 @@ FLAGS:
 
 OPTIONS:
     -a, --address <address>    Address to use [default: 0.0.0.0]
-    -p, --port <port>          Port to host website on [default: 8080]
+    -p, --port <port>          Port to use [default: 8080]
 
 ARGS:
     <input>    Input file [default: ./]

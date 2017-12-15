@@ -14,7 +14,7 @@ use structopt::StructOpt;
 #[structopt(name = "http-server", about = "A simple tool for hosting a static file server")]
 struct Opt {
     /// A flag, true if used in the command line.
-    #[structopt(short = "p", long = "port", help = "Port to host website on",  default_value = "8080")]
+    #[structopt(short = "p", long = "port", help = "Port to use",  default_value = "8080")]
     port: u16,
 
     /// A flag, true if used in the command line.
