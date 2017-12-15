@@ -10,19 +10,19 @@ A dead simple http server for serving local files for development purposes
 
 # Usage
 
-To server the local directory on http://localhost:8080
+To serve the local directory on http://localhost:8080
 
 ```bash
 http-server
 ```
 
-To server the local directory on http://localhost:[port]
+To serve the local directory on http://localhost:[port]
 
 ```bash
 http-server -p <port>
 ```
 
-To server the any directory on http://localhost:[port]
+To serve the any directory on http://localhost:[port]
 
 ```bash
 http-server -p <port> <directory>
