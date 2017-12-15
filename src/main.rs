@@ -8,7 +8,6 @@ use mount::Mount;
 extern crate structopt;
 #[macro_use]
 extern crate structopt_derive;
-use std::net::SocketAddr;
 use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
@@ -17,6 +16,10 @@ struct Opt {
     /// A flag, true if used in the command line.
     #[structopt(short = "p", long = "port", help = "Port to host website on",  default_value = "8080")]
     port: u16,
+
+    /// A flag, true if used in the command line.
+    #[structopt(short = "a", long = "address", help = "Address to use",  default_value = "0.0.0.0")]
+    address: String,
 
     /// Needed parameter, the first on the command line.
     #[structopt(help = "Input file", default_value = "./")]
@@ -38,8 +41,7 @@ fn main() {
     println!("Starting up http-server, serving {}",&opt.input);
     mount.mount("/", Static::new(path));
     println!("Available on:");
-    println!("  http://localhost:{}",opt.port);
-    println!("  http://0.0.0.0:{}",opt.port);
+    println!("  http://{}:{}",opt.address, opt.port);
     println!("Hit CTRL-C to stop the server");
-    Iron::new(mount).http(SocketAddr::from(([0, 0, 0, 0], opt.port))).unwrap();
+    Iron::new(mount).http((&*opt.address, opt.port)).unwrap();
 }
