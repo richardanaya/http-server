@@ -16,13 +16,13 @@ To server the local directory on http://localhost:8080
 http-server
 ```
 
-To server the local directory on http://localhost:<port>
+To server the local directory on http://localhost:[port]
 
 ```bash
 http-server -p <port>
 ```
 
-To server the any directory on http://localhost:<port>
+To server the any directory on http://localhost:[port]
 
 ```bash
 http-server -p <port> <directory>
