@@ -8,7 +8,7 @@ use mount::Mount;
 extern crate structopt;
 #[macro_use]
 extern crate structopt_derive;
-
+use std::net::SocketAddr;
 use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
@@ -38,8 +38,8 @@ fn main() {
     println!("Starting up http-server, serving {}",&opt.input);
     mount.mount("/", Static::new(path));
     println!("Available on:");
-    let s = format!("  http://localhost:{}/",opt.port);
-    println!("{}",s);
+    println!("  http://localhost:{}",opt.port);
+    println!("  http://0.0.0.0:{}",opt.port);
     println!("Hit CTRL-C to stop the server");
-    Iron::new(mount).http(format!("127.0.0.1:{}",opt.port)).unwrap();
+    Iron::new(mount).http(SocketAddr::from(([0, 0, 0, 0], opt.port))).unwrap();
 }
