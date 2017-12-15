@@ -37,8 +37,6 @@ http-server --help
 # Command Line Usage
 
 ```bash
-A simple tool for hosting a static file server
-
 USAGE:
     http-server [OPTIONS] [input]
 
