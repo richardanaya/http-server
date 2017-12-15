@@ -4,6 +4,10 @@ A dead simple http server for serving local files for development purposes
 
 # Installing
 
+Make sure you have
+
+Make sure your PATH is properly setup for `cargo install` as per https://doc.rust-lang.org/book/second-edition/ch14-04-installing-binaries.html
+
 ```bash
  cargo install http-server
 ```
