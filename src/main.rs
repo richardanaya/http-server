@@ -27,22 +27,30 @@ struct Opt {
 }
 
 fn main() {
-    let opt = Opt::from_args();
-    let mut mount = Mount::new();
-    let path = Path::new(&opt.input);
+    let opt: Opt = Opt::from_args();
+    let port: u16 = opt.port;
+    let address: &str = &*opt.address;
+    let input: String = opt.input;
+    let path: &Path = Path::new(&input);
+
     if !path.exists() {
-            println!("Path \"{}\" does not exist.", &opt.input);
-            return;
+        println!("Path \"{}\" does not exist.", input);
+        return
     }
     if !path.is_dir() {
-            println!("Path \"{}\" is not a directory.", &opt.input);
-            return;
+        println!("Path \"{}\" is not a directory.", input);
+        return
     }
-    println!("Starting up http-server, serving {}", &opt.input);
-    println!("Available on:");
-    println!("  http://{}:{}", opt.address, opt.port);
-    println!("Hit CTRL-C to stop the server");
-
+    let mut mount: Mount = Mount::new();
     mount.mount("/", Static::new(path));
-    Iron::new(mount).http((&*opt.address, opt.port)).unwrap();
+
+    match Iron::new(mount).http((address, port)) {
+        Ok(_f) => {
+            println!("Starting up http-server, serving {}", input);
+            println!("Available on:");
+            println!("  http://{}:{}", address, port);
+            println!("Hit CTRL-C to stop the server")
+        }
+        Err(err) => println!("{}", err)
+    }
 }
