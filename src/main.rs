@@ -2,6 +2,7 @@ extern crate iron;
 extern crate staticfile;
 extern crate mount;
 use std::path::Path;
+use std::process::exit;
 use iron::Iron;
 use staticfile::Static;
 use mount::Mount;
@@ -35,22 +36,25 @@ fn main() {
 
     if !path.exists() {
         println!("Path \"{}\" does not exist.", input);
-        return
+        exit(1)
     }
     if !path.is_dir() {
         println!("Path \"{}\" is not a directory.", input);
-        return
+        exit(1)
     }
     let mut mount: Mount = Mount::new();
     mount.mount("/", Static::new(path));
 
     match Iron::new(mount).http((address, port)) {
-        Ok(_f) => {
+        Ok(_) => {
             println!("Starting up http-server, serving {}", input);
             println!("Available on:");
             println!("  http://{}:{}", address, port);
             println!("Hit CTRL-C to stop the server")
         }
-        Err(err) => println!("{}", err)
+        Err(err) => {
+            println!("{}", err);
+            exit(1)
+        }
     }
 }
