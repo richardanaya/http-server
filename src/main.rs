@@ -23,23 +23,22 @@ struct Opt {
     address: String,
 
     /// Needed parameter, the first on the command line.
-    #[structopt(help = "Input file", default_value = "./")]
-    input: String,
+    #[structopt(help = "Input directory", default_value = "./")]
+    path: String,
 }
 
 fn main() {
     let opt: Opt = Opt::from_args();
     let port: u16 = opt.port;
     let address: &str = &*opt.address;
-    let input: String = opt.input;
-    let path: &Path = Path::new(&input);
+    let path: &Path = Path::new(&opt.path);
 
     if !path.exists() {
-        println!("Path \"{}\" does not exist.", input);
+        println!("Path {:?} does not exist.", path);
         exit(1)
     }
     if !path.is_dir() {
-        println!("Path \"{}\" is not a directory.", input);
+        println!("Path {:?} is not a directory.", path);
         exit(1)
     }
     let mut mount: Mount = Mount::new();
@@ -47,7 +46,7 @@ fn main() {
 
     match Iron::new(mount).http((address, port)) {
         Ok(_) => {
-            println!("Starting up http-server, serving {}", input);
+            println!("Starting up http-server, serving path {:?}", path);
             println!("Available on:");
             println!("  http://{}:{}", address, port);
             println!("Hit CTRL-C to stop the server")
