@@ -31,17 +31,18 @@ fn main() {
     let mut mount = Mount::new();
     let path = Path::new(&opt.input);
     if !path.exists() {
-            println!("Path \"{}\" does not exist.",&opt.input);
+            println!("Path \"{}\" does not exist.", &opt.input);
             return;
     }
     if !path.is_dir() {
-            println!("Path \"{}\" is not a directory.",&opt.input);
+            println!("Path \"{}\" is not a directory.", &opt.input);
             return;
     }
-    println!("Starting up http-server, serving {}",&opt.input);
-    mount.mount("/", Static::new(path));
+    println!("Starting up http-server, serving {}", &opt.input);
     println!("Available on:");
-    println!("  http://{}:{}",opt.address, opt.port);
+    println!("  http://{}:{}", opt.address, opt.port);
     println!("Hit CTRL-C to stop the server");
+
+    mount.mount("/", Static::new(path));
     Iron::new(mount).http((&*opt.address, opt.port)).unwrap();
 }
