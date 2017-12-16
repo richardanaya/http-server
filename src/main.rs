@@ -45,7 +45,7 @@ fn main() {
     mount.mount("/", Static::new(path));
 
     match Iron::new(mount).http((address, port)) {
-        Ok(_f) => {
+        Ok(_) => {
             println!("Starting up http-server, serving {}", input);
             println!("Available on:");
             println!("  http://{}:{}", address, port);
